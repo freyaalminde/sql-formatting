@@ -1,0 +1,11 @@
+{
+  "name": "sql-formatting",
+  "version": "1.0.0",
+  "description": "Format SQL source on Apple platforms using JavaScriptCore, SQL Formatter, and pg-minify.",
+  "author": "Freya Ariel <hifreyaariel@icloud.com>",
+  "license": "MIT",
+  "dependencies": {
+    "pg-minify": "^1.6.2",
+    "sql-formatter": "^4.0.2"
+  }
+}
