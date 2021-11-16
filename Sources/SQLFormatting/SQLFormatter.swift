@@ -1,6 +1,7 @@
 import JavaScriptCore
 
 /// A formatter that pretty prints and minifies SQL source code.
+@available(macOS 10.10, iOS 8, tvOS 9, *)
 public class SQLFormatter {
   // TODO: use JS build system & package.json instead of committing these libs to Git
   static let pgMinify = Bundle.module.path(forResource: "PGMinify", ofType: "js")!

@@ -4,8 +4,9 @@ import PackageDescription
 let package = Package(
   name: "sql-formatting",
   platforms: [
-    .macOS(.v10_5),
-    .iOS(.v7),
+    .macOS(.v10_10),
+    .iOS(.v8),
+    .tvOS(.v9),
   ],
   products: [
     .library(
@@ -16,7 +17,7 @@ let package = Package(
   targets: [
     .target(
       name: "SQLFormatting",
-      exclude: ["node_modules", "package.json", "yarn.lock"],
+      exclude: ["Documentation.docc", "node_modules", "package.json", "yarn.lock"],
       resources: [.copy("PGMinify.js"), .copy("SQLFormatter.js")]
     ),
     .testTarget(
