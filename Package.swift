@@ -17,7 +17,7 @@ let package = Package(
   targets: [
     .target(
       name: "SQLFormatting",
-      exclude: ["Documentation.docc", "node_modules", "package.json", "yarn.lock"],
+      exclude: ["Documentation.docc", "node_modules", "node_modules/.gitkeep", "package.json", "yarn.lock"],
       resources: [.copy("PGMinify.js"), .copy("SQLFormatter.js")]
     ),
     .testTarget(
