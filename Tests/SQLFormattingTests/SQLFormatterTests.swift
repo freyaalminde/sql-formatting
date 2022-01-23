@@ -15,7 +15,7 @@ final class SQLFormatterTests: XCTestCase {
     )
   }
   
-  func testFormattedStringWithIndentWidth8() throws {
+  func testFormattedStringWithIndentWidth() throws {
     XCTAssertEqual(
       SQLFormatter.formattedString(from: "select * from a_table", indent: "    "),
       """
@@ -52,6 +52,34 @@ final class SQLFormatterTests: XCTestCase {
     XCTAssertEqual(
       SQLFormatter.minifiedString(from: "select * from a_table", compress: true),
       "select*from a_table"
+    )
+  }
+  
+  func testFormattedStringWithMySQLDialect() throws {
+    XCTAssertEqual(
+      SQLFormatter.formattedString(from: "select `a_database`.`a_column`, `a_database`.`another_column` from `a_table`", dialect: .mysql),
+      """
+      select
+        `a_database`.`a_column`,
+        `a_database`.`another_column`
+      from
+        `a_table`
+      
+      """
+    )
+  }
+  
+  func testFormattedStringWithTSQLDialect() throws {
+    XCTAssertEqual(
+      SQLFormatter.formattedString(from: "select [a_database].[a_column], [a_database].[another_column] from [a_table]", dialect: .tsql),
+      """
+      select
+        [a_database].[a_column],
+        [a_database].[another_column]
+      from
+        [a_table]
+      
+      """
     )
   }
 }
