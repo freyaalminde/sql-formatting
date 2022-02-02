@@ -1,5 +1,7 @@
 import JavaScriptCore
 
+// TODO: consider splitting up the API like: SQLFormatter, PGFormatter, PGMinifier
+
 /// A formatter that pretty prints and minifies SQL source code.
 @available(macOS 10.10, iOS 8, tvOS 9, *)
 public class SQLFormatter {
@@ -7,8 +9,17 @@ public class SQLFormatter {
   static let pgMinify = Bundle.module.path(forResource: "PGMinify", ofType: "js")!
   static let sqlFormatter = Bundle.module.path(forResource: "SQLFormatter", ofType: "js")!
   
+//  /// The engine used for formatting.
+//  public enum FormattingEngine: String {
+//    /// SQL Formatter.
+//    case sqlFormatter
+//    /// pgFormatter.
+//    @available(macOS 10.10, *)
+//    case pgFormatter
+//  }
+  
   /// The SQL dialect used for formatting.
-  public enum Dialect: String {
+  public enum SQLDialect: String {
     /// MariaDB.
     case mariadb
     /// MySQL.
@@ -37,7 +48,7 @@ public class SQLFormatter {
   ///   - uppercase: Whether to uppercase keywords.
   public static func formattedString(
     from string: String,
-    dialect: Dialect? = nil,
+    dialect: SQLDialect? = nil,
     indent: String = "  ",
     uppercase: Bool = false
   ) -> String {
@@ -68,3 +79,38 @@ public class SQLFormatter {
       .toString()
   }
 }
+
+#if os(macOS)
+import PerlCore
+#endif
+
+#if canImport(PerlCore)
+
+extension SQLFormatter {
+  static let pgFormatter = Bundle.module.path(forResource: "PGFormatter", ofType: "pm")!
+  static var perlInterpreter: PerlInterpreter!
+  
+  public static func extendedFormattedString(from string: String) -> String {
+    if perlInterpreter == nil {
+      PerlInterpreter.initialize()
+      perlInterpreter = PerlInterpreter()
+      perlInterpreter.evaluateScript(try! String(contentsOfFile: Self.pgFormatter))
+    }
+    
+    perlInterpreter.scalarValue("string", true)!.asString = string
+    
+    return perlInterpreter.evaluateScript(
+      """
+      # my %args;
+      # $args{ 'uc_keywords' } = 1;
+      
+      my $beautifier = pgFormatter::Beautify->new(%args);
+      $beautifier->query($string);
+      $beautifier->beautify();
+      $beautifier->content;
+      """
+    ).asString
+  }
+}
+
+#endif

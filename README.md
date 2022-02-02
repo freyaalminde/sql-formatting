@@ -1,6 +1,6 @@
 # SQL Formatting
 
-Format SQL source on Apple platforms using JavaScriptCore, [SQL Formatter](https://github.com/zeroturnaround/sql-formatter), and [pg-minify](https://github.com/vitaly-t/pg-minify).
+Format SQL source on Apple platforms using [SQL Formatter](https://github.com/zeroturnaround/sql-formatter), [pgFormatter](https://github.com/michaelborn/SQLFormatter), and [pg-minify](https://github.com/vitaly-t/pg-minify).
 
 
 ## Installation
@@ -20,6 +20,8 @@ import SQLFormatting
 SQLFormatter.formattedString(from: "…")
 
 SQLFormatter.formattedString(from: "…", indent: "\t", uppercase: true)
+
+SQLFormatter.extendedFormattedString(from: "…")
 
 SQLFormatter.minifiedString(from: "…")
 

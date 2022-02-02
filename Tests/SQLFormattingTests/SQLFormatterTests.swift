@@ -1,5 +1,6 @@
 import XCTest
 @testable import SQLFormatting
+@testable import PerlCore
 
 final class SQLFormatterTests: XCTestCase {
   func testFormattedString() throws {
@@ -82,4 +83,25 @@ final class SQLFormatterTests: XCTestCase {
       """
     )
   }
+  
+#if os(macOS)
+  func testExtendedFormattedString() throws {
+    for _ in 1...3 {
+      XCTAssertEqual(
+        SQLFormatter.extendedFormattedString(from: "select a,b,c from d where e = f"),
+      """
+      SELECT
+          a,
+          b,
+          c
+      FROM
+          d
+      WHERE
+          e = f
+      
+      """
+      )
+    }
+  }
+#endif
 }

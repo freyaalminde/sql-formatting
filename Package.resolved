@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "perl-core",
+        "repositoryURL": "https://github.com/freyaariel/perl-core.git",
+        "state": {
+          "branch": "main",
+          "revision": "18d32422880299f2758984f8298cdab53beb055b",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
