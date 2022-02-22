@@ -1,0 +1,21 @@
+name: test
+on: [ push, pull_request ]
+
+jobs:
+  test:
+    runs-on: macos-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        destination:
+          - macOS
+          - iOS Simulator,name=iPhone 13
+          - tvOS Simulator,name=Apple TV
+          - watchOS Simulator,name=Apple Watch Series 7 - 45mm
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v2
+    - name: Build
+      run: xcodebuild build -scheme sql-formatting -destination 'platform=${{ matrix.destination }}'
+    - name: Test
+      run: xcodebuild test -scheme sql-formatting -destination 'platform=${{ matrix.destination }}'

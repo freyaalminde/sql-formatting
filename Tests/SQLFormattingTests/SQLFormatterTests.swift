@@ -1,8 +1,8 @@
 import XCTest
 @testable import SQLFormatting
-@testable import PerlCore
 
 final class SQLFormatterTests: XCTestCase {
+#if canImport(JavaScriptCore)
   func testFormattedString() throws {
     XCTAssertEqual(
       SQLFormatter.formattedString(from: "select * from a_table"),
@@ -83,8 +83,9 @@ final class SQLFormatterTests: XCTestCase {
       """
     )
   }
-  
-#if os(macOS)
+#endif
+
+#if canImport(PerlCore)
   func testExtendedFormattedString() throws {
     for _ in 1...3 {
       XCTAssertEqual(

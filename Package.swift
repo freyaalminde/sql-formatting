@@ -1,4 +1,4 @@
-// swift-tools-version:5.3
+// swift-tools-version:5.5
 import PackageDescription
 
 let package = Package(
@@ -7,22 +7,19 @@ let package = Package(
     .macOS(.v10_10),
     .iOS(.v9),
     .tvOS(.v9),
+    .watchOS(.v7),
   ],
   products: [
-    .library(
-      name: "SQLFormatting",
-      targets: ["SQLFormatting"]
-    ),
+    .library(name: "SQLFormatting", targets: ["SQLFormatting"]),
   ],
   dependencies: [
-    .package(name: "perl-core", url: "https://github.com/freyaariel/perl-core.git", .branch("main")),
+    .package(name: "perl-core", url: "https://github.com/freyaariel/perl-core.git", branch: "feature/xcframework"),
   ],
   targets: [
     .target(
       name: "SQLFormatting",
-      dependencies: [.product(name: "PerlCore", package: "perl-core", condition: .when(platforms: [.macOS]))],
-      // TODO: remove `Documentation.docc` from here once we can use swift-tools-version:5.5 on GitHub
-      exclude: ["Documentation.docc", "node_modules", "node_modules/.gitkeep", "package.json", "yarn.lock"],
+      dependencies: [.product(name: "PerlCore", package: "perl-core")],
+      exclude: ["node_modules", "package.json", "yarn.lock"],
       resources: [.copy("PGMinify.js"), .copy("PGFormatter.pm"), .copy("SQLFormatter.js")]
     ),
     .testTarget(
