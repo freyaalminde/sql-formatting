@@ -13,7 +13,7 @@ let package = Package(
     .library(name: "SQLFormatting", targets: ["SQLFormatting"]),
   ],
   dependencies: [
-    .package(name: "perl-core", url: "https://github.com/freyaariel/perl-core.git", branch: "feature/xcframework"),
+    .package(name: "perl-core", url: "https://github.com/freyaariel/perl-core.git", from: "0.1.0"),
   ],
   targets: [
     .target(

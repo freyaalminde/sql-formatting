@@ -5,9 +5,9 @@
         "package": "perl-core",
         "repositoryURL": "https://github.com/freyaariel/perl-core.git",
         "state": {
-          "branch": "feature/xcframework",
-          "revision": "2cd548e0af607a9729596289546547e0ec09d7a6",
-          "version": null
+          "branch": null,
+          "revision": "0777f2f5a9658e1b87c8db2ef1c87556918006d5",
+          "version": "0.1.0"
         }
       }
     ]
