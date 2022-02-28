@@ -89,20 +89,54 @@ final class SQLFormatterTests: XCTestCase {
   func testExtendedFormattedString() throws {
     for _ in 1...3 {
       XCTAssertEqual(
-        SQLFormatter.extendedFormattedString(from: "select a,b,c from d where e = f"),
-      """
-      SELECT
+        SQLFormatter.extendedFormattedString(from: "SELECT a,b,c from d where e = f"),
+        """
+        select
           a,
           b,
           c
-      FROM
+        from
           d
-      WHERE
+        where
+          e = f
+        
+        """
+      )
+    }
+  }
+  
+  func testExtendedFormattedStringWithIndentWidth() throws {
+    XCTAssertEqual(
+      SQLFormatter.extendedFormattedString(from: "select a,b,c from d where e = f", indent: "    "),
+      """
+      select
+          a,
+          b,
+          c
+      from
+          d
+      where
           e = f
       
       """
-      )
-    }
+    )
+  }
+  
+  func testExtendedFormattedStringWithUppercase() throws {
+    XCTAssertEqual(
+      SQLFormatter.extendedFormattedString(from: "select a,b,c from d where e = f", uppercase: true),
+      """
+      SELECT
+        a,
+        b,
+        c
+      FROM
+        d
+      WHERE
+        e = f
+      
+      """
+    )
   }
 #endif
 }

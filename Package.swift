@@ -19,8 +19,8 @@ let package = Package(
     .target(
       name: "SQLFormatting",
       dependencies: [.product(name: "PerlCore", package: "perl-core")],
-      exclude: ["node_modules", "package.json", "yarn.lock"],
-      resources: [.copy("PGMinify.js"), .copy("PGFormatter.pm"), .copy("SQLFormatter.js")]
+      exclude: ["node_modules", "package.json", "yarn.lock", "PGFormatter.pm"],
+      resources: [.copy("PGMinify.js"), .copy("SQLFormatter.js")]
     ),
     .testTarget(
       name: "SQLFormattingTests",
