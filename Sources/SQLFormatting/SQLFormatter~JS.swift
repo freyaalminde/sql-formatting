@@ -52,16 +52,18 @@ extension SQLFormatter {
     indent: String = "  ",
     uppercase: Bool = false
   ) -> String {
+    let arguments: [String: Any] = [
+      "language": dialect?.rawValue ?? "sql",
+      "indent": indent,
+      "uppercase": uppercase
+    ]
+
     let context = JSContext()!
     context.evaluateScript("var window = {}")
     context.evaluateScript(try! String(contentsOfFile: Self.sqlFormatter))
     return context
       .evaluateScript("window.sqlFormatter.format")!
-      .call(withArguments: [string, [
-        "language": dialect?.rawValue ?? "sql",
-        "indent": indent,
-        "uppercase": uppercase
-      ]])
+      .call(withArguments: [string, arguments])
       .toString() + "\n"
   }
   
