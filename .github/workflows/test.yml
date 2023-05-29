@@ -11,7 +11,7 @@ jobs:
           - macOS
           - iOS Simulator,name=iPhone 13
           - tvOS Simulator,name=Apple TV
-          - watchOS Simulator,name=Apple Watch Series 7 - 45mm
+          - watchOS Simulator,name=Apple Watch Ultra (49mm)
     steps:
     - name: Check out repository
       uses: actions/checkout@v2
