@@ -3,11 +3,11 @@
     "pins": [
       {
         "package": "perl-core",
-        "repositoryURL": "https://github.com/freyaariel/perl-core.git",
+        "repositoryURL": "https://github.com/freyaalminde/perl-core.git",
         "state": {
-          "branch": null,
-          "revision": "0777f2f5a9658e1b87c8db2ef1c87556918006d5",
-          "version": "0.1.0"
+          "branch": "main",
+          "revision": "33e4ce16e46ba914c168560478b7bb751d45cd7d",
+          "version": null
         }
       }
     ]
