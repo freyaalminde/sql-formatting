@@ -6,7 +6,7 @@ Format SQL source on Apple platforms using [SQL Formatter](https://github.com/ze
 ## Installation
 
 ```swift
-.package(url: "https://github.com/freyaalminde/sql-formatting.git", branch: "main")
+.package(url: "https://github.com/freysie/sql-formatting.git", branch: "main")
 ```
 
 ```swift
